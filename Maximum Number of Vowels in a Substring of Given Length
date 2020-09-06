@@ -1,0 +1,58 @@
+Approach 2 : Sliding Window
+Intuition
+
+we make a substring of k length from 0th index and check the number of vowel in it.
+
+keep a variable for storing the number of vowel for each substring and update if current count is greater than the previous value.
+
+Last return the variable.
+
+Algorithm
+
+Initialize a variable (ans) for storing the max count of vowel up to a curtain length.
+
+Store the number of vowel in first k length substring into the ans.
+
+Initialize a variable lans with value ans.
+
+Run a loop untill last index reached and in every substring do the following
+
+    if the previous index of Starting the substring is vowel subtract 1 from the lans.
+
+    if the next index of last of the substring is vowel then add 1 into the lans.
+
+    Example - string is "leetcode" and k=3 if the previous substring is "etc" and new substing
+    
+    is "tco" then we subtract 1 from lans because 'e' from previous substring is removed now and add 1
+    
+    because 'o' is added into the new substring.
+
+    update ans if ans is greater than lans.
+return ans.
+
+class Solution {
+public:
+    int maxVowels(string s, int k) {
+        int ans = 0;
+        int j = k;
+        for(int i=0; i<j; i++){
+            if(s[i]=='a' or s[i]=='e' or s[i]=='i' or s[i]=='o' or s[i]=='u')ans++;
+        }
+        int i = 1;
+        int lans = ans;
+        while(j<s.size()){
+            if(s[i-1]=='a' or s[i-1]=='e' or s[i-1]=='i' or s[i-1]=='o' or s[i-1]=='u')lans--;
+            if(s[j]=='a' or s[j]=='e' or s[j]=='i' or s[j]=='o' or s[j]=='u')lans++;
+            ans = max(ans, lans);
+            i++;
+            j++;
+        }
+        return ans;
+    }
+};
+
+Complexity Analysis
+
+Time Complexity: K+(N-K) which is O(N), where N is the length of string and k is length is given length of substring.
+
+Space Complexity: O(1).
