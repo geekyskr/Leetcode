@@ -1,4 +1,4 @@
-Approach 2 : Sliding Window
+Approach : Sliding Window
 Intuition
 
 we make a substring of k length from 0th index and check the number of vowel in it.
